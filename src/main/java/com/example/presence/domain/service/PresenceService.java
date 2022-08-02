@@ -14,12 +14,21 @@ public class PresenceService {
     
     private IPresenceRepository presenceRepository;
 
-    public Presence registerPresence(User user, Optional<LocalDateTime> date ) {
+    public Presence registerPresence(User user) {
 
         return this.presenceRepository.save(
             new Presence()
             .setUser(user)
-            .setDate(date.isPresent() ? date.get() : LocalDateTime.now())
+            .setDate(LocalDateTime.now())
+        );
+    }
+
+    public Presence registerPresence(User user, LocalDateTime date ) {
+
+        return this.presenceRepository.save(
+            new Presence()
+            .setUser(user)
+            .setDate(date)
         );
     }
 
